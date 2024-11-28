@@ -1,0 +1,7 @@
+### Here is a template of the env file, so you will get all the variables you need in your
+### testing enviroment. Simply just copy the contents of this file into your env file and
+### fill it out. :) I will also keep updating this with the new env variables we will need as
+### we go on with the project.
+
+### Mongodb Connection
+MONGODB_URI = 
