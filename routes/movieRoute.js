@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 /** Routes **/
-// Change this how you need it to talk to the controller
+// Change this how you need it to talk to the controller checking
 router.get('/', (req, res) => {res.json( {message: 'Movies!'} )});
 
 
