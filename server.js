@@ -8,6 +8,7 @@ const app = express();
 
 
 /** Middleware **/
+// This allows json to be used in the res actions
 app.use(express.json());
 // Hook to index route
 app.use('/', require('./routes/indexRoute'));
