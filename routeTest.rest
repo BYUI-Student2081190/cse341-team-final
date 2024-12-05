@@ -1,0 +1,184 @@
+############################
+###      Local Tests     ###
+############################
+
+
+###  VIDEOGAME COLLECTION
+############################
+
+### Select All
+GET http://localhost:2024/videogames
+
+### Select By Title - Result should return one entry with matching title
+GET http://localhost:2024/videogames/title/Super Bomberman R
+
+### Select By Type - Result should return all entries with matching type
+GET http://localhost:2024/videogames/type/Co-Op
+
+### Create New Entry - Valid 1
+POST  http://localhost:2024/videogames
+Content-Type: application/json
+
+{
+    "title":"Super Bomberman R",
+    "descript":"Bomberman is back and ready to blow things up!",
+    "publisher":"Konami",
+    "developer":"Konami",
+    "gameType": ["Co-Op", "Action", "Party"],
+    "ageRating":"Everyone",
+    "numOfPlayers":"1-8 Players Local and Online"
+}
+
+### Create New Entry - Valid 2
+POST  http://localhost:2024/videogames
+Content-Type: application/json
+
+{
+    "title":"Test 2",
+    "descript":"I am a cool test!",
+    "publisher":"Test Corp.",
+    "developer":"Test Corp.",
+    "gameType": ["Co-Op", "Adventure", "Learning"],
+    "ageRating":"Everyone 10 and Older",
+    "numOfPlayers":"1 Player"
+}
+
+### Create New Entry - Valid 3
+POST  http://localhost:2024/videogames
+Content-Type: application/json
+
+{
+    "title":"Test 3",
+    "descript":"I am a rad test!",
+    "publisher":"Test Corp.",
+    "developer":"Test Corp.",
+    "gameType": ["RPG", "Learning", "Test"],
+    "ageRating":"Teen",
+    "numOfPlayers":"3 Players"
+}
+
+### Create New Entry - Error Test 1:
+### Leave required fields blank, result should not go through,
+### and ageRating should equal "No Age Rating"
+POST  http://localhost:2024/videogames
+Content-Type: application/json
+
+{
+    "title":"",
+    "descript":"",
+    "publisher":"",
+    "developer":"",
+    "gameType": [],
+    "ageRating":"",
+    "numOfPlayers":""
+}
+
+### Create New Entry - Error Test 2:
+### Create a new entry with the same title, result should be
+### this cannot happen. Because two entries cannot have the same
+### title
+POST  http://localhost:2024/videogames
+Content-Type: application/json
+
+{
+    "title":"Super Bomberman R",
+    "descript":"If I exsist I am an error and someone is going to cry.",
+    "publisher":"Error Core",
+    "developer":"Error Core",
+    "gameType": ["Error"],
+    "ageRating":"Not For Anyone",
+    "numOfPlayers":"1 Player"
+}
+
+### Update Entry - Valid 1 (If not working make sure update the _id to the current one)
+PUT  http://localhost:2024/videogames/675001134384c2e792710c4b
+Content-Type: application/json
+
+{
+    "title":"Test Test 2",
+    "descript":"I am a awesome test!",
+    "publisher":"Test Corp. Inc.",
+    "developer":"Test Corp. The Boss",
+    "gameType": ["Co-Op", "Adventure", "Learning", "Fighting"],
+    "ageRating":"Everyone 10, 1, and Older",
+    "numOfPlayers":"300 Players"
+}
+
+### Update Entry - Valid 1 - Revert Entry back
+PUT  http://localhost:2024/videogames/675001134384c2e792710c4b
+Content-Type: application/json
+
+{
+    "title":"Test 2",
+    "descript":"I am a cool test!",
+    "publisher":"Test Corp.",
+    "developer":"Test Corp.",
+    "gameType": ["Co-Op", "Adventure", "Learning"],
+    "ageRating":"Everyone 10 and Older",
+    "numOfPlayers":"1 Player"
+}
+
+### Update Entry - Error Test 1:
+### Leave required fields blank, result should not go through,
+### and ageRating should equal "No Age Rating" 
+PUT  http://localhost:2024/videogames/675001134384c2e792710c4b
+Content-Type: application/json
+
+{
+    "title":"",
+    "descript":"",
+    "publisher":"",
+    "developer":"",
+    "gameType": [],
+    "ageRating":"",
+    "numOfPlayers":""
+}
+
+### Update Entry - Error Test 2:
+### Update the entry to have the same title as another entry, 
+### request should not go through. Because two entries 
+### cannot have the same title
+PUT  http://localhost:2024/videogames/675001134384c2e792710c4b
+Content-Type: application/json
+
+{
+    "title":"Test 3",
+    "descript":"I am a cool test!",
+    "publisher":"Test Corp.",
+    "developer":"Test Corp.",
+    "gameType": ["Co-Op", "Adventure", "Learning"],
+    "ageRating":"Everyone 10 and Older",
+    "numOfPlayers":"1 Player"
+}
+
+### Create Deletable Valid Entry
+POST http://localhost:2024/videogames
+Content-Type: application/json
+
+{
+    "title":"Delete ME",
+    "descript":"I need to be deleted!",
+    "publisher":"Delete",
+    "developer":"Delete",
+    "gameType": ["Co-Op", "Adventure", "Learning"],
+    "numOfPlayers":"1 Player"
+}
+
+### Delete Entry (Make sure to change the id to match the deletable entry)
+DELETE http://localhost:2024/videogames/675009295d84bc5c244ce843
+
+
+
+###  BOOK COLLECTION     
+############################
+
+
+
+
+###  MOVIE COLLECTION     
+############################
+
+
+
+###  USER COLLECTION    
+############################
