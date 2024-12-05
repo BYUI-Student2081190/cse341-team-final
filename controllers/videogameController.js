@@ -6,6 +6,7 @@ const Videogame = require('../models/Videogame');
 // Select all videogames in the db
 const selectAll = async (req, res) => {
     try {
+        //#swagger.tags=['Videogames']
         // Try to select all the videogames from the db
         const result = await Videogame.find();
         res.status(200).send(result);
@@ -19,6 +20,7 @@ const selectAll = async (req, res) => {
 // Select a videogame in the db based on title
 const selectByTitle = async (req, res) => {
     try {
+        //#swagger.tags=['Videogames']
         const vgTitle = req.params.title;
         const result = await Videogame.find( {title : vgTitle} );
 
@@ -38,6 +40,7 @@ const selectByTitle = async (req, res) => {
 // Select videogames by type in the db
 const selectByType = async (req, res) => {
     try {
+        //#swagger.tags=['Videogames']
         const vgType = req.params.type;
         const result = await Videogame.find( {gameType : { $in : vgType} });
 
@@ -57,6 +60,7 @@ const selectByType = async (req, res) => {
 // Create a videogame entry
 const createVideoGameEntry = async (req, res) => {
     try {
+        //#swagger.tags=['Videogames']
         // Obtain the insert data
         const insertData = ({
             title: req.body.title,
@@ -80,6 +84,7 @@ const createVideoGameEntry = async (req, res) => {
 // Update a videogame entry
 const updateVideoGameEntry = async (req, res) => {
     try {
+        //#swagger.tags=['Videogames']
         // Obtain the data id
         const id = req.params.id;
         // Get the replace data
@@ -122,6 +127,7 @@ const updateVideoGameEntry = async (req, res) => {
 // Delete a videogame entry
 const deleteVideoGameEntry = async (req, res) => {
     try {
+        //#swagger.tags=['Videogames']
         // Obtain the id
         const id = req.params.id;
 
