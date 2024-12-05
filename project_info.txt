@@ -10,6 +10,8 @@ Chris:
 of your URI in your .env file. Also added the ability to allow you to type "npm start" in the terminal for the project to run.
 So far everything works, the db connects, and you are able to make it to the index route. Let me know if you have any questions!
 
+12/03/2024: Added the CRUD and validation to the videogame collection.
+
 Annabelle:
 
 Orlando:
