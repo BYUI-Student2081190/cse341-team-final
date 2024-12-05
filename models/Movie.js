@@ -14,7 +14,7 @@ const Schema = mongoose.Schema;
             validator: Number.isInteger,
             message: 'Year must be a number and not a letter.',
           },
-        min: [3000,'Year is 4 digits long.'],
+        min: [0,'Year is 4 digits long.'],
     },
     rating : {
         type: String,
@@ -36,7 +36,7 @@ const Schema = mongoose.Schema;
     views: {
         type: String,
         required: [true, 'Amount of views  is required'],
-        minlength:[10, 'Views must be at least 1 character long.'],
+        minlength:[1, 'Views must be at least 1 character long.'],
         trim: true,
     },
     length: {
