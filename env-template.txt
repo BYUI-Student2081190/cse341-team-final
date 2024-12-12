@@ -5,3 +5,9 @@
 
 ### Mongodb Connection
 MONGODB_URI = 
+
+### GitHub Connection Through OAuth
+CLIENT_ID = Ov23lihnVD5HPQK4YtOs
+CLIENT_SECRET = 947fa5a21dad47f374dc910d883e1fb5a5ea1b10
+CALLBACK_URL = http://localhost:2024/github/callback
+SESSION_SECRET = secret
