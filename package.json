@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --no-watchman",
     "start": "node server.js",
     "swagger": "node swagger-auto-gen.js"
   },
