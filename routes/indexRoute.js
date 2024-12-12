@@ -4,8 +4,6 @@ const router = express.Router();
 
 
 /** Routes **/
-// This intro can get changed later on
-router.get('/', (req, res) => {res.json( {message: 'Hello! Welcome to the api! You are running and are connected to the db!'} )});
 // Swagger Route
 router.use('/api-docs', require('./swaggerRoute'));
 // Routes to all the other routers
