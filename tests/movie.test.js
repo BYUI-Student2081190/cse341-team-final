@@ -1,10 +1,10 @@
 
 const mockingoose = require('mockingoose');
-const { getSingleMovieById } = require('../controllers/movieController'); // Adjust path
+const { getSingleMovieById, getAllMovies } = require('../controllers/movieController'); 
 const mongoose = require('mongoose');
-const movieSchema = require('../models/Movie'); // Adjust path
+const movieSchema = require('../models/Movie'); 
 
-
+  
 describe('getSingleMovieById', () => {
     let req, res;
 
@@ -75,7 +75,5 @@ describe('getSingleMovieById', () => {
         expect(res.status).toHaveBeenCalledWith(500);
         expect(res.json).toHaveBeenCalledWith({ error: 'Failed to fetch movie by ID' });
     });
-});
-
-
-
+}); 
+ 
