@@ -1,4 +1,4 @@
-const userModel = require('../models/user');
+const userModel = require('../models/User');
 const objectId = require('mongodb').ObjectId;
 
 const controllers = {};
@@ -6,30 +6,33 @@ const controllers = {};
 //GET
 controllers.getUsers = async (req, res) => {
     //#swagger.tags=['users']
-    const result = await userModel.find();
-    //console.log(result);
-    if (result !== null) {
+    try {
+        const result = await userModel.find();
+        //console.log(result);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(result)
 
-    } else {
-        res.status(500).json(result.error || 'An error occured getting users')
+    } catch (error) {
+        res.status(500).json(error.message || 'An error occured getting users')
     }
 };
 
 controllers.getOneUser = async (req, res) => {
     //#swagger.tags=['users']
-    const userId = req.params.id;
-    const result = await userModel.find({ _id: userId });
+    try {
+        const userId = req.params.id;
+        const result = await userModel.findOne({ _id: userId });
 
-    if (result !== null) {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result[0]);
-    } else {
-        res.status(500).json(result.error || 'Error: user not found')
+        if (!result) {
+            res.status(404).json({message: 'Could not find user by id.'});
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(result);
+        };
+    } catch (error) {
+        res.status(500).json(error.message || 'Error: user not found');
     }
-
-}
+};
 
 //POST         
 controllers.addUser = async (req, res) => {
@@ -48,7 +51,7 @@ controllers.addUser = async (req, res) => {
     } else {
         res.status(500).json(response.error || 'Some error occurred while adding the user');
     }
-}
+};
 
 //PUT 
 controllers.updateUser = async (req, res) => {
@@ -69,7 +72,7 @@ controllers.updateUser = async (req, res) => {
         res.status(500).json(response.error || 'Some error occurred while updating the user');
     }
 
-}
+};
 
 //DELETE
 controllers.deleteUser = async (req, res) => {
@@ -83,6 +86,6 @@ controllers.deleteUser = async (req, res) => {
     } else {
         res.status(500).json(response.error || 'Some error occurred while deleting the user');
     }
-}
+};
 
 module.exports = controllers;

@@ -22,11 +22,11 @@ const selectByTitle = async (req, res) => {
     try {
         //#swagger.tags=['Videogames']
         const vgTitle = req.params.title;
-        const result = await Videogame.find( {title : vgTitle} );
+        const result = await Videogame.findOne( {title : vgTitle} );
 
         // If there is not a videogame with that title
         // have a 404 error
-        if (!result.length) {
+        if (!result) {
             res.status(404).send({message: `Could not find a videogame with the title ${vgTitle} in the db. Please try another title.`});
         } else {
             res.status(200).send(result);
@@ -46,10 +46,10 @@ const selectByType = async (req, res) => {
 
         // If things came back display, otherwise tell the user
         // nothing matches the search
-        if (result.length > 0) {
-            res.status(200).send(result);
-        } else {
+        if (result.length <= 0) {
             res.status(404).send({message: `There is no videogame with the type of ${vgType}. Please input a different type.`});
+        } else {
+            res.status(200).send(result);
         }
     } catch (error) {
         // If an error occurs send a 500
@@ -99,10 +99,10 @@ const updateVideoGameEntry = async (req, res) => {
         });
         // Do a quick check to see if the entry
         // even is in the db at all
-        const check = await Videogame.find( {_id : id} );
+        const check = await Videogame.findOne( {_id : id} );
 
         // If nothing comes back, throw a 400 error
-        if (!check.length) {
+        if (!check) {
             res.status(400).send({message: `Cannot update videogame data because _id:${id} does not exsist in the collection.`});
         } else {
             // Now try to update the db entry
@@ -132,9 +132,9 @@ const deleteVideoGameEntry = async (req, res) => {
         const id = req.params.id;
 
         // Do a quick check to see if it is even in the db
-        const check = await Videogame.find( {_id : id} );
+        const check = await Videogame.findOne( {_id : id} );
 
-        if (!check.length) {
+        if (!check) {
             // Send the error
             res.status(400).send({message: `There is no videogame with the _id:${id} in the collection.`});
         } else {

@@ -20,4 +20,11 @@ module.exports = class TestResponse {
         this.data = data
     }
 
+    // Added setHeader so it will run with the
+    // tests... this may just be set to do nothing.
+    header = {}
+    setHeader(info) {
+        this.header = info
+    }
+
 };
