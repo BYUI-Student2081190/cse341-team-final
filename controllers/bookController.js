@@ -6,30 +6,33 @@ const controllers = {};
 //GET
 controllers.getBooks = async (req, res) => {
     //#swagger.tags=['Books']
-    const result = await bookModel.find();
-    //console.log(result);
-    if (result !== null) {
+    try { 
+        const result = await bookModel.find();
+        //console.log(result);
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(result)
 
-    } else {
-        res.status(500).json(result.error || 'An error occured getting books')
+    } catch (error) {
+        res.status(500).json(error.message || 'An error occured getting books')
     }
 };
 
 controllers.getByTitle = async (req, res) => {
     //#swagger.tags=['Books']
-    const bookTitle = req.params.title;
-    const result = await bookModel.find({ title: bookTitle });
+    try{
+        const bookTitle = req.params.title;
+        const result = await bookModel.findOne({ title: bookTitle });
 
-    if (result !== null) {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result[0]);
-    } else {
-        res.status(500).json(result.error || 'Error: book not found')
+        if (!result) {
+            res.status(404).json({message: 'Could not find the book title in the db.'});
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(result);
+        };
+    } catch(error) {
+        res.status(500).json(error.message || 'Error: book not found')
     }
-
-}
+};
 
 //POST         
 controllers.addBook = async (req, res) => {
@@ -51,7 +54,7 @@ controllers.addBook = async (req, res) => {
     } else {
         res.status(500).json(response.error || 'Some error occurred while adding the book');
     }
-}
+};
 
 //PUT 
 controllers.updateBook = async (req, res) => {
@@ -75,7 +78,7 @@ controllers.updateBook = async (req, res) => {
         res.status(500).json(response.error || 'Some error occurred while updating the book');
     }
 
-}
+};
 
 //DELETE
 controllers.deleteBook = async (req, res) => {
@@ -89,6 +92,6 @@ controllers.deleteBook = async (req, res) => {
     } else {
         res.status(500).json(response.error || 'Some error occurred while deleting the book');
     }
-}
+};
 
 module.exports = controllers;
